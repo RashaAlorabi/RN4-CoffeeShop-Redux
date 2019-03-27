@@ -8,6 +8,7 @@ const initialState = {
 const coffeeReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_COFFEESHOPS:
+      console.log(action.payload);
       return {
         ...state,
         coffeeShops: action.payload,

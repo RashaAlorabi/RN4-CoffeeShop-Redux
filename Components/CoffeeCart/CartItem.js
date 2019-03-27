@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { removeItemFromCart } from "../../store/actions/CartActions";
+import { connect } from "react-redux";
 // NativeBase Components
 import { Text, Left, Body, Right, Button, ListItem, Icon } from "native-base";
 
@@ -11,7 +12,7 @@ class CartItem extends Component {
         <Left>
           <Text style={{ color: "white", marginLeft: 16 }}> {item.drink} </Text>
           <Text note style={{ marginLeft: 16 }}>
-            {item.option}
+            {/* {item.option} */}
           </Text>
         </Left>
         <Body>
@@ -19,12 +20,21 @@ class CartItem extends Component {
         </Body>
         <Right>
           <Button transparent>
-            <Icon name="trash" style={{ color: "white", fontSize: 21 }} />
+            <Icon
+              name="trash"
+              style={{ color: "white", fontSize: 21 }}
+              onPress={() => this.props.removeItemFromCart(item)}
+            />
           </Button>
         </Right>
       </ListItem>
     );
   }
 }
-
-export default CartItem;
+const mapDispatchToProps = dispatch => ({
+  removeItemFromCart: item => dispatch(removeItemFromCart(item))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(CartItem);
